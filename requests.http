@@ -1,0 +1,63 @@
+@baseUrl = http://localhost:3000
+
+### GET /announcements — без параметрів
+GET {{baseUrl}}/announcements
+
+### GET /announcements — з параметром search
+GET {{baseUrl}}/announcements?search=ноутбук
+
+### GET /announcements — з параметрами sort та page
+GET {{baseUrl}}/announcements?sort=oldest&page=1
+
+### GET /announcements/:id — існуючий ID
+GET {{baseUrl}}/announcements/1
+
+### GET /announcements/:id — неіснуючий ID
+GET {{baseUrl}}/announcements/99999
+
+### POST /announcements — валідні дані
+POST {{baseUrl}}/announcements
+Content-Type: application/json
+
+{
+  "title": "Продам ноутбук ASUS",
+  "description": "Відмінний стан, 16GB RAM, SSD 512GB",
+  "price": 18000,
+  "category": "sale",
+  "contactInfo": "0991234567"
+}
+
+### POST /announcements — невалідні дані (коротка назва, ціна <= 0)
+POST {{baseUrl}}/announcements
+Content-Type: application/json
+
+{
+  "title": "ASUS",
+  "description": "Коротко",
+  "price": -100,
+  "category": "invalid",
+  "contactInfo": "123"
+}
+
+### PATCH /announcements/:id — часткове оновлення
+PATCH {{baseUrl}}/announcements/1
+Content-Type: application/json
+
+{
+  "price": 17000,
+  "title": "Продам ноутбук ASUS (знижка)"
+}
+
+### PATCH /announcements/:id — неіснуючий ID
+PATCH {{baseUrl}}/announcements/99999
+Content-Type: application/json
+
+{
+  "price": 15000
+}
+
+### DELETE /announcements/:id
+DELETE {{baseUrl}}/announcements/1
+
+### DELETE /announcements/:id — неіснуючий ID
+DELETE {{baseUrl}}/announcements/99999

@@ -1,0 +1,26 @@
+{
+  "name": "announcement-board-api",
+  "version": "1.0.0",
+  "description": "REST API для дошки оголошень — Express, Prisma, celebrate, Swagger",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "prisma:migrate": "prisma migrate dev",
+    "postinstall": "prisma generate"
+  },
+  "keywords": ["express", "prisma", "rest-api", "swagger", "celebrate"],
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^6.9.0",
+    "@prisma/client": "^6.9.0",
+    "better-sqlite3": "^11.10.0",
+    "celebrate": "^15.0.3",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "prisma": "^6.9.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

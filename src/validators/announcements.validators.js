@@ -18,7 +18,7 @@ export const getAnnouncementsValidator = celebrate({
 
 export const idValidator = celebrate({
   [Segments.PARAMS]: Joi.object({
-    id: Joi.number().integer().required(),
+    id: Joi.number().integer().positive().required(),
   }),
 });
 
@@ -33,9 +33,6 @@ export const createAnnouncementValidator = celebrate({
 });
 
 export const updateAnnouncementValidator = celebrate({
-  [Segments.PARAMS]: Joi.object({
-    id: Joi.number().integer().required(),
-  }),
   [Segments.BODY]: Joi.object({
     title: announcementFields.title.optional(),
     description: announcementFields.description.optional(),

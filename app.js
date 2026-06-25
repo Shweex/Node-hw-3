@@ -6,7 +6,7 @@ import { errors } from 'celebrate';
 import announcementsRouter from './src/routes/announcements.routes.js';
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const swaggerSpec = swaggerJsdoc({
   definition: {

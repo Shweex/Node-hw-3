@@ -3,24 +3,16 @@ import prisma from '../../prisma/client.js';
 const PER_PAGE = 10;
 
 export const getAnnouncements = async (req, res) => {
-  const { search, sort = 'newest', page = 1 } = req.query;
+  const { search, sort, page } = req.query;
   const pageNum = Math.max(1, Number(page) || 1);
   const where = {};
 
   if (search && search.trim()) {
-    const term = `%${search.trim()}%`;
-    const matchingIds = await prisma.$queryRaw`
-      SELECT id FROM Announcement
-      WHERE title LIKE ${term} COLLATE NOCASE
-    `;
-    const ids = matchingIds.map((row) => row.id);
-    where.id = { in: ids.length > 0 ? ids : [-1] };
+    where.title = { contains: search.trim() };
   }
 
-  let orderBy = { createdAt: 'desc' };
-  if (sort === 'oldest') {
-    orderBy = { createdAt: 'asc' };
-  }
+  const orderBy =
+    sort === 'oldest' ? { createdAt: 'asc' } : { createdAt: 'desc' };
 
   const skip = (pageNum - 1) * PER_PAGE;
 
@@ -36,7 +28,7 @@ export const getAnnouncements = async (req, res) => {
 
   const totalPages = Math.ceil(total / PER_PAGE) || 1;
 
-  res.json({
+  res.status(200).json({
     data,
     pagination: {
       total,

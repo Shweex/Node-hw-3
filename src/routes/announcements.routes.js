@@ -149,7 +149,7 @@ router.post('/', createAnnouncementValidator, createAnnouncement);
  *       404:
  *         description: Оголошення не знайдено
  */
-router.patch('/:id', updateAnnouncementValidator, updateAnnouncement);
+router.patch('/:id', idValidator, updateAnnouncementValidator, updateAnnouncement);
 
 /**
  * @swagger
